@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Politique de confidentialité – Lucky Look</title>
+<link rel="icon" href="../media/images/favicon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Zilla+Slab:wght@400;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1a1008;--bark:#2e1f0e;--leather:#5c3a1e;--rust:#8b4513;--sand:#c4956a;--gold:#c8973b;--parchment:#f2e8d5;--cream:#faf5ec;--smoke:#e8dcc8;--ff-display:'Alfa Slab One',serif;--ff-slab:'Zilla Slab',serif;--ff-body:'Barlow',sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--ff-body);background:var(--cream);color:var(--ink);overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1140px;margin:auto;padding:0 24px;}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  .reveal.visible{opacity:1;transform:none;}
+  /* TOPBAR */
+  .topbar{background:var(--ink);padding:7px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--sand);}
+  .topbar a{color:var(--gold);transition:opacity .2s;}.topbar a:hover{opacity:.75;}
+  .topbar-social{display:flex;gap:14px;}
+  .topbar-social a{color:var(--sand);font-size:14px;transition:color .2s;}.topbar-social a:hover{color:var(--gold);}
+  /* HEADER */
+  header{position:sticky;top:0;z-index:100;background:var(--bark);border-bottom:2px solid var(--gold);box-shadow:0 4px 24px rgba(0,0,0,.4);}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;}
+  .logo-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .logo-wrap img{height:52px;}
+  .logo-name{font-family:var(--ff-display);font-size:22px;color:var(--parchment);line-height:1;}
+  .logo-sub{font-size:10px;color:var(--sand);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;}
+  nav ul{list-style:none;display:flex;gap:2px;}
+  nav ul li a{display:block;padding:9px 15px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+  nav ul li a:hover,nav ul li.active a{color:var(--gold);border-bottom-color:var(--gold);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+  .burger span{display:block;width:26px;height:2px;background:var(--parchment);transition:.3s;}
+  .mobile-nav{display:none;background:var(--bark);padding:12px 24px 20px;border-top:1px solid rgba(200,151,59,.2);}
+  .mobile-nav.open{display:block;}
+  .mobile-nav a{display:block;padding:11px 0;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);border-bottom:1px solid rgba(255,255,255,.06);}
+  /* PAGE BANNER */
+  .page-banner{background:var(--bark);padding:60px 0;position:relative;overflow:hidden;border-bottom:3px solid var(--gold);}
+  .page-banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);}
+  .page-banner .container{position:relative;z-index:1;}
+  .page-banner .eyebrow{color:var(--sand);}
+  .page-banner h1{font-family:var(--ff-display);font-size:clamp(28px,5vw,56px);color:var(--parchment);line-height:1.05;margin-top:8px;}
+  /* MAIN CONTENT AREA */
+  .page-body{padding:80px 0;background:var(--cream);}
+  .page-body::before{content:'';display:block;height:4px;background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 8px,transparent 8px,transparent 14px);opacity:.3;margin-bottom:80px;}
+  /* PROSE */
+  .prose h1,.prose h2,.prose h3{font-family:var(--ff-slab);color:var(--bark);margin:28px 0 12px;}
+  .prose h1{font-size:clamp(22px,3vw,32px);}
+  .prose h2{font-size:clamp(18px,2.5vw,26px);padding-bottom:8px;border-bottom:1px solid rgba(200,151,59,.3);}
+  .prose h3{font-size:18px;}
+  .prose p{font-size:16px;line-height:1.85;color:#4a3828;margin-bottom:16px;}
+  .prose strong{color:var(--bark);}
+  .prose a{color:var(--rust);font-weight:600;border-bottom:1px solid transparent;transition:border-color .2s;}
+  .prose a:hover{border-bottom-color:var(--rust);}
+  .prose ul,.prose ol{margin:16px 0 16px 24px;}
+  .prose ul li,.prose ol li{font-size:15px;color:#4a3828;line-height:1.8;margin-bottom:6px;}
+  .prose img{max-width:380px;width:100%;border-radius:3px;margin:16px auto;box-shadow:0 6px 24px rgba(0,0,0,.12);}
+  /* BACK BTN */
+  .back-btn{display:inline-flex;align-items:center;gap:8px;background:var(--bark);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:11px 22px;border:2px solid var(--gold);margin-top:32px;transition:background .2s,color .2s;}
+  .back-btn:hover{background:var(--gold);color:var(--ink);}
+  /* FOOTER CTA */
+  .footer-cta{background:var(--ink);padding:60px 0;text-align:center;position:relative;overflow:hidden;}
+  .footer-cta::before{content:'✦';font-size:240px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(200,151,59,.04);pointer-events:none;}
+  .footer-cta h2{font-family:var(--ff-display);font-size:clamp(24px,4vw,48px);color:var(--parchment);margin-bottom:14px;position:relative;}
+  .footer-cta p{font-size:16px;color:var(--sand);margin-bottom:28px;position:relative;}
+  .btn-primary{display:inline-block;background:var(--gold);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 30px;border:2px solid var(--gold);transition:background .2s,color .2s;}
+  .btn-primary:hover{background:transparent;color:var(--gold);}
+  /* FOOTER */
+  footer{background:var(--bark);padding:56px 0 0;border-top:3px solid var(--gold);}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(200,151,59,.15);}
+  .footer-brand img{height:48px;margin-bottom:16px;}
+  .footer-brand p{font-size:13px;color:var(--sand);line-height:1.85;}
+  .footer-brand a{color:var(--gold);}
+  .footer-col h4{font-family:var(--ff-slab);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(200,151,59,.2);}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:9px;}
+  .footer-col ul li a{font-size:13px;color:var(--sand);transition:color .2s;}
+  .footer-col ul li a:hover{color:var(--parchment);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-size:12px;color:rgba(196,149,106,.5);flex-wrap:wrap;gap:8px;}
+  .footer-bottom a{color:var(--sand);transition:color .2s;}
+  .footer-bottom a:hover{color:var(--parchment);}
+  .footer-social{display:flex;gap:10px;margin-top:18px;}
+  .footer-social a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(200,151,59,.3);color:var(--sand);transition:border-color .2s,color .2s;}
+  .footer-social a:hover{border-color:var(--gold);color:var(--gold);}
+  .back-top{position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:50;}
+  .back-top.show{opacity:1;pointer-events:auto;}
+  .back-top:hover{transform:translateY(-3px);}
+  /* RESPONSIVE */
+  @media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:768px){nav{display:none;}.burger{display:flex;}.footer-grid{grid-template-columns:1fr;}.topbar{justify-content:center;text-align:center;}}
+  @media(max-width:480px){.header-inner{padding:12px 16px;}}
+
+  .legal-content{max-width:820px;}
+  .legal-content h1{font-family:var(--ff-slab);font-size:26px;color:var(--bark);margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--gold);}
+  .legal-content b{display:block;font-family:var(--ff-slab);font-size:16px;color:var(--bark);margin:24px 0 8px;}
+  .legal-content p,.legal-content li{font-size:15px;line-height:1.85;color:#4a3828;margin-bottom:12px;}
+  .legal-content ul{margin:10px 0 10px 20px;}
+  .legal-content a{color:var(--rust);}
+  .legal-content center{text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>📍 111 Bd de Champigny, 94210 Saint-Maur-des-Fossés &nbsp;·&nbsp; 📞 <a href="tel:0148867872">01 48 86 78 72</a> &nbsp;·&nbsp; ✉ <a href="mailto:contact@luckylook.fr">contact@luckylook.fr</a></span>
+  <div class="topbar-social">
+    <a href="https://www.facebook.com/Lucky-Look-101553676050602" target="_blank"><svg width="13" height="13" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+    <a href="https://www.instagram.com/lucky_look94/" target="_blank"><svg width="13" height="13" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+  </div>
+</div>
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo-wrap">
+      <img src="../media/images/logo.png" alt="Lucky Look" onerror="this.style.display='none'">
+      <div><div class="logo-name">Lucky Look</div><div class="logo-sub">Depuis 1979 · Saint-Maur-des-Fossés</div></div>
+    </a>
+    <nav><ul><li><a href="../index.html">Accueil</a></li>
+<li><a href="vetement-country.html">Notre style &amp; marques</a></li>
+<li><a href="photos-vetements.html">Notre collection</a></li>
+<li><a href="nouveautes-western.html">Actualités</a></li>
+<li><a href="boutique-de-vetements.html">Contact</a></li>
+</ul></nav>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+  <div class="mobile-nav" id="mobileNav"><a href="../index.html">Accueil</a>
+<a href="vetement-country.html">Notre style &amp; marques</a>
+<a href="photos-vetements.html">Notre collection</a>
+<a href="nouveautes-western.html">Actualités</a>
+<a href="boutique-de-vetements.html">Contact</a>
+</div>
+</header>
+
+<div class="page-banner">
+  <div class="container">
+    <p class="eyebrow">Lucky Look</p>
+    <h1>Politique de Confidentialité</h1>
+  </div>
+</div>
+<div class="page-body">
+  <div class="container">
+    <div class="legal-content reveal">
+    <h1 class="fs-5 border-bottom pb-2">POLITIQUE DE CONFIDENTIALITE</h1>
+    <b>Art.1 Règles de confidentialité</b><br>Le règlement général sur la protection des données du 27 avril 2016 (ci-après le RGPD, ce qui signifie le General Data Protection Regulation) est d’application à partir du 25 mai 2018. Il impose des règles et conditions strictes aux entreprises et commerçants dans le cadre du traitement des données à caractère personnel de leurs clients et prospects, et ce afin de protéger la vie privée de ceux-ci.<br><br>A travers la présente, nous entendons vous communiquer des informations claires et précises concernant le traitement de vos données à caractère personnel.<br><br><b>Art.2 Le responsable du traitement</b><br>Le « responsable du traitement » de vos données à caractère personnel est le responsable du site que vous avez utilisé et auquel vous avez communiqué des données.<br><br><b>Art.3 Base légales du traitement des données et utilisation</b><br>Nous ne pouvons utiliser vos données à caractère personnel qu’à des fins à la fois légitimes et nécessaires (art. 6 du RGPD) :<br>Cela signifie concrètement que nous traitons vos données à caractère personnel, que cela soit ou non sous forme électronique, pour des finalités légitimes dans le cadre de la relation contractuelle, du business et de la sécurité/sûreté.<br>Ces finalités sont notamment, mais pas seulement, les suivantes :<ul>    <li>Communication d’informations, offres et prospect;</li>    <li>Communications dans le cadre de l’exécution d’un contrat;</li></ul><b>Art.4 Qu’est qu’une donnée à caractère personnel</b><br>Les données à caractère personnel incluent toutes les informations qui vous concernent et sur base desquelles vous pouvez être identifié. Les données anonymes, qui ne permettent pas de vous identifier, ne sont par conséquent pas considérées comme des données à caractère personnel. Vos données à caractère personnel peuvent donc comprendre :<ul><li>Données relatives à votre identité (nom, prénom, adresse, numéro à la TVA, numéro d’entreprise, etc.)</li><li>Données de statut personnel (numéro de téléphone, e-mail personnel, …)</li><li>Données financières (numéro de compte bancaire, détails de facturation, …)</li><li>Données relatives à l’exécution du contrat conclu avec nous (objet du contrat, adresse de facturation, données professionnelles, …)</li><li>Données relatives à l’utilisation d’équipement électronique, tel que des ordinateurs (mot de passe, log data, données d’identification électronique, détails de facturation, …)</li></ul>Données sensibles :<br>Le traitement de données à caractère personnel révélant l’origine raciale ou ethnique, les opinions politiques, les convictions religieuses ou philosophiques, ainsi que le traitement des données génétiques, des données biométriques aux fins d’identifier une personne physique de manière unique, des données concernant la vie sexuelle ou l’orientation sexuelle d’une personne physique sont interdits.<br>Nous nous engageons à respecter strictement cette interdiction.<br><br><b>Comment utilisons-nous vos informations ?<br>Avec qui partageons-nous vos informations ?</b><br><br><b>Art.5 Sources et origines des données à caractère personnel</b><br>En principe, les données que nous possédons proviennent de vous.<br>Si vous n’entendez pas fournir les informations obligatoires ou nécessaires, vous pouvez perdre le bénéfice de certains avantages et/ou nous pouvons décider de mettre fin à nos services à votre profit.<br><br><b>Art.6 Accès aux données à caractère personnel</b><br>Vos données sont essentiellement à usage interne. Pour certains motifs légitimes, vos données à caractère personnel peuvent être communiquées, voire même traitées, par des tierces parties. Nous veillerons toutefois au respect de la réglementation RGPD par nos sous-traitants. Le traitement des données par ces derniers est régi par un cadre légal strict.<br><br><b>Art.7 Durée de conservation des données</b><br>Nous mettons les moyens nécessaires en œuvre afin d’assurer que la conservation des données à caractère personnel pour les finalités décrites ci-dessus n’outrepasse pas les durées légales.<br><br><b>Art.8 Quels sont vos droits ?</b><br>Nous nous engageons à prendre les mesures techniques et organisationnelles appropriées afin de garantir la sécurité du traitement des données à caractère personnel de chacun (Art. 32 du RGPD).<ul>    <li>Droit d’accès (Art. 15 du RGPD)</li></ul>Nous accordons à chacun le droit d’accéder à ses propres données à caractère personnel et le droit d’en obtenir ou d’en faire une copie dans la mesure du raisonnable.<ul>    <li>Droit de rectification (Art. 16 RGPD)</li></ul>Nous reconnaissons la possibilité de demander la rectification des données erronées et de demander de compléter ce qui doit l’être.<ul><li>Droit à l’oubli (Art. 17 du GDPR) et Droit à la limitation du traitement (Art. 18 du GDPR)</li></ul>Nous nous engageons à octroyer l’effacement de vos données à caractère personnel notamment dans les cas suivants :<ul>    <li>Données n’étant plus nécessaires au regard des finalités pour lesquelles elles avaient été collectées ou traitées</li>    <li>Vous vous opposez au traitement</li>    <li>Les données à caractère personnel ont fait l’objet d’un traitement illicite</li>    <li>Droit d’introduire une réclamation (Art. 77 du GDPR)</li></ul>Le client a le droit d’introduire à tout moment une réclamation auprès de la Commission vie privée s’il estime que le traitement de ses données à caractère personnel constitue une violation de GDPR.<br><br><b>Art.9. Notre engagement</b><br>Nous avons pour objectif de mettre en œuvre des techniques de sécurité afin de protéger les données stockées contre les accès non autorisés, les usages inappropriés, les altérations, la destruction illégale ou accidentelle et la perte accidentelle.<br><br><b>Art.10. Procédure en cas de violations</b><br>Il est toujours possible que des données à caractère personnel traitées dans le cadre de la relation contractuelle tombent dans de mauvaises mains à la suite d’une erreur humaine, d’une erreur informatique, etc. <br>Lorsque la violation présente un risque élevé pour les droits et libertés de la personne, nous l’informerons immédiatement des faits et mesures. Nous nous assurerons que le nécessaire soit fait quant à la notification de la violation en question à la Commission vie privée dans les 72 heures après en avoir pris connaissance, à moins que la violation ne présente pas un risque élevé pour les droits et libertés de la personne. (Art. 32-34 du GDPR).<br><br>Votre accord :<br><br><b>Art. 11. Consentement</b><br>Vous donnez votre consentement exprès, éclairé et univoque en vue du traitement des données à caractère personnel tels que décrites dans la présente Privacy Notice. Vous avez le droit de retirer votre consentement à tout moment, sur simple demande écrite. Nous nous réservons le droit de modifier la présente Privacy Notice.
+           <br><br><br><center><b>Opposition au démarchage téléphonique</b></center><br><br>Conformément à la loi « informatique et libertés » n°2014-344 du 17 mars 2014 relative à la consommation et aux dispositions du Code de la Consommation (Article L. 223-2 du Code de la Consommation), vous pouvez exercer votre droit d'accès aux données vous concernant en vous inscrivant sur la liste d'opposition au démarchage téléphonique <a href='https://www.bloctel.gouv.fr/' target='_blank'>« Bloctel »</a>.
+    </div>
+  </div>
+</div>
+
+<div class="footer-cta">
+  <div class="container" style="position:relative;z-index:1">
+    <h2>Une question ? Contactez-nous</h2>
+    <p>Notre équipe est à votre disposition du lundi au samedi, 9h–12h et 14h–19h.</p>
+    <a href="boutique-de-vetements.html" class="btn-primary">Prendre contact</a>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html"><img src="../media/images/footer-logo.png" alt="Lucky Look" onerror="this.style.display='none'"></a>
+        <p>111 Boulevard de Champigny<br>94210 Saint-Maur-des-Fossés<br><br>
+        <a href="tel:0148867872">Tél. 01 48 86 78 72</a><br>
+        <a href="mailto:contact@luckylook.fr">contact@luckylook.fr</a><br><br>
+        N°TVA : FR24316214378</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/Lucky-Look-101553676050602" target="_blank"><svg width="13" height="13" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+          <a href="https://www.instagram.com/lucky_look94/" target="_blank"><svg width="13" height="13" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="vetement-country.html">Notre style et nos marques</a></li>
+        <li><a href="photos-vetements.html">Notre collection</a></li>
+        <li><a href="nouveautes-western.html">Actualités</a></li>
+        <li><a href="boutique-de-vetements.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Horaires</h4><ul>
+        <li><a style="color:var(--parchment);font-weight:600">Lun – Sam</a></li>
+        <li><a>9h – 12h</a></li>
+        <li><a>14h – 19h</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Informations</h4><ul>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentiality_ws.html">Politique de confidentialité</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Lucky Look — Tous droits réservés</span>
+      <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+  </div>
+</footer>
+<div class="back-top" id="backTop">↑</div>
+
+<script>
+  document.getElementById('burger').addEventListener('click',function(){document.getElementById('mobileNav').classList.toggle('open');});
+  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  const bt=document.getElementById('backTop');
+  bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  window.addEventListener('scroll',()=>bt.classList.toggle('show',window.scrollY>400));
+</script>
+</body>
+</html>
