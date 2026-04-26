@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucky Look : magasin de vêtements Saint-Maur-des-Fossés, jeannerie, jean</title>
+  <meta name="description" content="Magasin de vêtements ouvert depuis 1979, Lucky Look vous propose un grand choix de produits imprégnés de l'atmosphère western. Jeannerie, chaussures, accessoires.">
+  <link rel="icon" href="media/images/favicon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Zilla+Slab:ital,wght@0,400;0,600;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:      #1a1008;
+      --bark:     #2e1f0e;
+      --leather:  #5c3a1e;
+      --rust:     #8b4513;
+      --sand:     #c4956a;
+      --gold:     #c8973b;
+      --parchment:#f2e8d5;
+      --cream:    #faf5ec;
+      --smoke:    #e8dcc8;
+      --ff-display: 'Alfa Slab One', serif;
+      --ff-slab:    'Zilla Slab', serif;
+      --ff-body:    'Barlow', sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-body); background: var(--cream); color: var(--ink); overflow-x: hidden; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .4;
+    }
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+    .container { max-width: 1140px; margin: auto; padding: 0 24px; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .divider { display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; }
+    .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--sand); opacity:.4; }
+    .divider span { color:var(--gold); flex-shrink:0; }
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* TOPBAR */
+    .topbar {
+      background: var(--ink); padding: 7px 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap:6px;
+      font-size: 12px; font-weight: 500; letter-spacing:.04em; color: var(--sand);
+    }
+    .topbar a { color: var(--gold); transition: opacity .2s; }
+    .topbar a:hover { opacity:.75; }
+    .topbar-social { display:flex; gap:14px; }
+    .topbar-social a { color:var(--sand); font-size:14px; transition:color .2s; }
+    .topbar-social a:hover { color:var(--gold); }
+
+    /* HEADER */
+    header { position:sticky; top:0; z-index:100; background:var(--bark); border-bottom:2px solid var(--gold); box-shadow:0 4px 24px rgba(0,0,0,.4); }
+    .header-inner { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; }
+    .logo-wrap { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+    .logo-wrap img { height:52px; }
+    .logo-name { font-family:var(--ff-display); font-size:22px; color:var(--parchment); line-height:1; }
+    .logo-sub { font-size:10px; color:var(--sand); letter-spacing:.12em; text-transform:uppercase; margin-top:4px; }
+    nav ul { list-style:none; display:flex; gap:2px; }
+    nav ul li a { display:block; padding:9px 15px; font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--smoke); border-bottom:2px solid transparent; transition:color .2s,border-color .2s; }
+    nav ul li a:hover, nav ul li.active a { color:var(--gold); border-bottom-color:var(--gold); }
+    .burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .burger span { display:block; width:26px; height:2px; background:var(--parchment); transition:.3s; }
+    .mobile-nav { display:none; background:var(--bark); padding:12px 24px 20px; border-top:1px solid rgba(200,151,59,.2); }
+    .mobile-nav.open { display:block; }
+    .mobile-nav a { display:block; padding:11px 0; font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--smoke); border-bottom:1px solid rgba(255,255,255,.06); }
+
+    /* HERO */
+    .hero { position:relative; height:clamp(480px,72vh,760px); overflow:hidden; background:var(--bark); }
+    .hero-bg { position:absolute; inset:0; background:url('media/images/upload/content-home.jpg') center 30%/cover; transform:scale(1.06); transition:transform 8s ease-out; }
+    .hero-bg.loaded { transform:scale(1); }
+    .hero::after { content:''; position:absolute; inset:0; background: linear-gradient(to right, rgba(26,16,8,.88) 0%, rgba(26,16,8,.3) 60%, transparent 100%), linear-gradient(to top, rgba(26,16,8,.6) 0%, transparent 60%); }
+    .hero-content { position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(24px,6vw,100px); max-width:680px; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; padding:5px 14px; margin-bottom:20px; width:fit-content; animation:fadeDown .6s var(--ease) both; }
+    .hero-title { font-family:var(--ff-display); font-size:clamp(38px,6vw,72px); line-height:.95; color:var(--parchment); margin-bottom:22px; animation:fadeDown .7s .1s var(--ease) both; }
+    .hero-title em { font-style:normal; color:var(--gold); }
+    .hero-desc { font-size:clamp(14px,1.6vw,17px); color:var(--smoke); line-height:1.75; max-width:480px; margin-bottom:32px; animation:fadeDown .7s .2s var(--ease) both; }
+    .hero-desc strong { color:var(--parchment); }
+    .hero-cta { display:flex; gap:14px; flex-wrap:wrap; animation:fadeDown .7s .3s var(--ease) both; }
+    .hero-since { position:absolute; bottom:32px; right:40px; z-index:2; text-align:right; animation:fadeDown .7s .4s var(--ease) both; }
+    .hero-since .num { font-family:var(--ff-display); font-size:72px; line-height:1; color:rgba(200,151,59,.15); }
+    .hero-since .lbl { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--sand); }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:none} }
+
+    .btn-primary { display:inline-block; background:var(--gold); color:var(--ink); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:14px 30px; border:2px solid var(--gold); transition:background .2s,color .2s; }
+    .btn-primary:hover { background:transparent; color:var(--gold); }
+    .btn-outline { display:inline-block; background:transparent; color:var(--parchment); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:14px 30px; border:2px solid rgba(242,232,213,.35); transition:border-color .2s,color .2s; }
+    .btn-outline:hover { border-color:var(--parchment); color:#fff; }
+
+    /* HOURS */
+    .hours-band { background:var(--ink); border-top:3px solid var(--gold); border-bottom:1px solid rgba(200,151,59,.15); }
+    .hours-inner { display:flex; align-items:stretch; }
+    .hours-label { background:var(--gold); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; writing-mode:vertical-rl; padding:18px 14px; display:flex; align-items:center; white-space:nowrap; }
+    .hours-grid { display:flex; flex:1; }
+    .hour-col { flex:1; padding:18px 10px; text-align:center; border-right:1px solid rgba(200,151,59,.1); }
+    .hour-col:last-child { border-right:none; }
+    .hour-day { font-family:var(--ff-slab); font-size:15px; font-weight:600; color:var(--gold); margin-bottom:6px; }
+    .hour-time { font-size:11px; color:var(--sand); line-height:1.7; }
+
+    /* INTRO */
+    .intro { padding:100px 0 80px; background:var(--cream); position:relative; }
+    .intro::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 8px,transparent 8px,transparent 14px); opacity:.35; }
+    .intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .intro-text h2 { font-family:var(--ff-display); font-size:clamp(28px,3.5vw,44px); line-height:1.1; color:var(--bark); margin-bottom:18px; }
+    .intro-text h3 { font-family:var(--ff-slab); font-size:20px; color:var(--bark); margin:24px 0 12px; }
+    .intro-text p { font-size:16px; line-height:1.85; color:#4a3828; margin-bottom:14px; }
+    .intro-text a { color:var(--rust); font-weight:600; border-bottom:1px solid transparent; transition:border-color .2s; }
+    .intro-text a:hover { border-bottom-color:var(--rust); }
+    .intro-img { position:relative; }
+    .intro-img img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .intro-img::before { content:''; position:absolute; inset:-12px -12px 12px 12px; border:2px solid var(--gold); opacity:.35; z-index:-1; }
+
+    /* PRODUCTS */
+    .products { background:var(--bark); padding:90px 0; position:relative; overflow:hidden; }
+    .products::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px); }
+    .products .sec-head { text-align:center; margin-bottom:56px; }
+    .products .sec-head h2 { font-family:var(--ff-display); font-size:clamp(26px,4vw,48px); color:var(--parchment); margin-bottom:12px; }
+    .products .sec-head p { font-size:16px; color:var(--sand); max-width:520px; margin:auto; line-height:1.7; }
+    .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .product-card { position:relative; overflow:hidden; background:var(--leather); cursor:pointer; }
+    .product-card img { width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform .6s var(--ease),filter .4s; filter:brightness(.9) saturate(.85); }
+    .product-card:hover img { transform:scale(1.06); filter:brightness(.7) saturate(.7); }
+    .product-card-body { position:absolute; bottom:0; left:0; right:0; padding:28px 22px 22px; background:linear-gradient(to top,rgba(26,16,8,.95) 0%,transparent 100%); transform:translateY(10px); transition:transform .4s var(--ease); }
+    .product-card:hover .product-card-body { transform:none; }
+    .product-card-num { font-family:var(--ff-display); font-size:44px; color:rgba(200,151,59,.15); line-height:1; margin-bottom:-6px; }
+    .product-card h3 { font-family:var(--ff-slab); font-size:24px; font-weight:600; color:var(--parchment); margin-bottom:8px; }
+    .product-card p { font-size:14px; color:var(--sand); line-height:1.6; max-height:0; overflow:hidden; transition:max-height .4s var(--ease),opacity .4s; opacity:0; }
+    .product-card:hover p { max-height:80px; opacity:1; }
+    .products-cta { text-align:center; margin-top:40px; position:relative; z-index:1; }
+
+    /* GALLERY */
+    .gallery { padding:90px 0; background:var(--parchment); }
+    .gallery .sec-head { margin-bottom:44px; }
+    .gallery .sec-head h2 { font-family:var(--ff-display); font-size:clamp(26px,3.5vw,44px); color:var(--bark); }
+    .gallery-grid { display:grid; grid-template-columns:repeat(5,1fr); grid-auto-rows:180px; gap:6px; }
+    .gallery-grid a { display:block; overflow:hidden; position:relative; }
+    .gallery-grid a:nth-child(1) { grid-column:span 2; grid-row:span 2; }
+    .gallery-grid a:nth-child(6) { grid-column:span 2; }
+    .gallery-grid img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease),filter .4s; filter:sepia(.15) brightness(.95); }
+    .gallery-grid a:hover img { transform:scale(1.07); filter:sepia(0) brightness(1); }
+    .gallery-grid a::after { content:'+'; position:absolute; inset:0; background:rgba(200,151,59,0); display:flex; align-items:center; justify-content:center; font-size:32px; color:#fff; transition:background .3s; }
+    .gallery-grid a:hover::after { background:rgba(200,151,59,.22); }
+    .gallery-cta { margin-top:28px; text-align:center; }
+
+    /* NEWSLETTER */
+    .newsletter { background:var(--rust); padding:70px 0; position:relative; overflow:hidden; }
+    .newsletter::before { content:'LUCKY LOOK'; position:absolute; font-family:var(--ff-display); font-size:180px; color:rgba(255,255,255,.04); top:50%; left:50%; transform:translate(-50%,-50%); white-space:nowrap; pointer-events:none; }
+    .newsletter-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .newsletter-text h2 { font-family:var(--ff-display); font-size:36px; color:var(--parchment); margin-bottom:12px; }
+    .newsletter-text p { font-size:15px; color:rgba(242,232,213,.75); line-height:1.7; }
+    .newsletter-text a { color:var(--parchment); text-decoration:underline; }
+    .nl-form { display:flex; flex-direction:column; gap:12px; }
+    .nl-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .nl-input { width:100%; background:rgba(26,16,8,.3); border:1px solid rgba(242,232,213,.3); color:var(--parchment); font-family:var(--ff-body); font-size:14px; padding:12px 16px; outline:none; transition:border-color .2s; }
+    .nl-input::placeholder { color:rgba(242,232,213,.4); }
+    .nl-input:focus { border-color:var(--parchment); }
+    .nl-gdpr { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:rgba(242,232,213,.7); line-height:1.5; }
+    .nl-gdpr input { flex-shrink:0; margin-top:2px; accent-color:var(--gold); }
+    .nl-gdpr a { color:var(--parchment); }
+    .nl-submit { background:var(--ink); color:var(--gold); font-family:var(--ff-body); font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:14px 32px; border:2px solid var(--ink); cursor:pointer; align-self:flex-start; transition:background .2s,color .2s,border-color .2s; }
+    .nl-submit:hover { background:transparent; color:var(--ink); border-color:var(--ink); }
+
+    /* NEWS */
+    .news { padding:90px 0; background:var(--cream); }
+    .news .sec-head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; flex-wrap:wrap; gap:16px; }
+    .news .sec-head h2 { font-family:var(--ff-display); font-size:clamp(26px,3.5vw,44px); color:var(--bark); }
+    .news-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .news-card { display:flex; gap:20px; align-items:flex-start; padding:22px; background:var(--parchment); border-left:3px solid var(--gold); transition:transform .3s var(--ease),box-shadow .3s; }
+    .news-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(92,58,30,.15); }
+    .news-card-img { width:96px; height:76px; object-fit:cover; flex-shrink:0; filter:sepia(.1); }
+    .news-card-body { flex:1; }
+    .news-card-date { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+    .news-card h3 { font-family:var(--ff-slab); font-size:15px; font-weight:600; color:var(--bark); line-height:1.4; margin-bottom:7px; }
+    .news-card h3 a:hover { color:var(--rust); }
+    .news-card p { font-size:13px; color:#5a4030; line-height:1.6; margin-bottom:10px; }
+    .news-readmore { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--rust); display:inline-flex; align-items:center; gap:6px; }
+    .news-readmore::after { content:'→'; transition:transform .2s; }
+    .news-card:hover .news-readmore::after { transform:translateX(4px); }
+
+    /* FOOTER CTA */
+    .footer-cta { background:var(--ink); padding:64px 0; text-align:center; position:relative; overflow:hidden; }
+    .footer-cta::before { content:'✦'; font-size:260px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:rgba(200,151,59,.04); pointer-events:none; }
+    .footer-cta h2 { font-family:var(--ff-display); font-size:clamp(26px,4vw,52px); color:var(--parchment); margin-bottom:14px; position:relative; }
+    .footer-cta p { font-size:16px; color:var(--sand); margin-bottom:32px; position:relative; }
+
+    /* FOOTER */
+    footer { background:var(--bark); padding:56px 0 0; border-top:3px solid var(--gold); }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(200,151,59,.15); }
+    .footer-brand img { height:48px; margin-bottom:16px; }
+    .footer-brand p { font-size:13px; color:var(--sand); line-height:1.85; }
+    .footer-brand a { color:var(--gold); }
+    .footer-col h4 { font-family:var(--ff-slab); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid rgba(200,151,59,.2); }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:9px; }
+    .footer-col ul li a { font-size:13px; color:var(--sand); transition:color .2s; }
+    .footer-col ul li a:hover { color:var(--parchment); }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding:16px 0; font-size:12px; color:rgba(196,149,106,.5); flex-wrap:wrap; gap:8px; }
+    .footer-bottom a { color:var(--sand); transition:color .2s; }
+    .footer-bottom a:hover { color:var(--parchment); }
+    .footer-social { display:flex; gap:10px; margin-top:18px; }
+    .footer-social a { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(200,151,59,.3); color:var(--sand); font-size:13px; transition:border-color .2s,color .2s; }
+    .footer-social a:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* BACK TOP */
+    .back-top { position:fixed; bottom:28px; right:28px; width:44px; height:44px; background:var(--gold); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s,transform .3s; z-index:50; }
+    .back-top.show { opacity:1; pointer-events:auto; }
+    .back-top:hover { transform:translateY(-3px); }
+
+    /* RESPONSIVE */
+    @media (max-width:1024px) {
+      .intro-grid { grid-template-columns:1fr; gap:48px; }
+      .intro-img { order:-1; }
+      .intro-img::before { display:none; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:768px) {
+      nav { display:none; }
+      .burger { display:flex; }
+      .product-grid { grid-template-columns:1fr; }
+      .product-card img { aspect-ratio:16/9; }
+      .gallery-grid { grid-template-columns:repeat(3,1fr); grid-auto-rows:120px; }
+      .gallery-grid a:nth-child(1) { grid-column:span 2; grid-row:span 1; }
+      .gallery-grid a:nth-child(6) { grid-column:span 1; }
+      .newsletter-inner { grid-template-columns:1fr; gap:32px; }
+      .nl-row { grid-template-columns:1fr; }
+      .news-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .hours-label { display:none; }
+      .hero-since { display:none; }
+      .topbar { justify-content:center; text-align:center; }
+    }
+    @media (max-width:480px) {
+      .header-inner { padding:12px 16px; }
+      .hero-content { padding:0 20px; }
+      .gallery-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 111 Bd de Champigny, 94210 Saint-Maur-des-Fossés &nbsp;·&nbsp; 📞 <a href="tel:0148867872">01 48 86 78 72</a> &nbsp;·&nbsp; ✉ <a href="mailto:contact@luckylook.fr">contact@luckylook.fr</a></span>
+  <div class="topbar-social">
+    <a href="https://www.facebook.com/Lucky-Look-101553676050602" target="_blank" aria-label="Facebook">
+      <svg width="13" height="13" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/lucky_look94/" target="_blank" aria-label="Instagram">
+      <svg width="13" height="13" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <img src="media/images/logo.png" alt="Lucky Look" onerror="this.style.display='none'">
+      <div>
+        <div class="logo-name">Lucky Look</div>
+        <div class="logo-sub">Depuis 1979 · Saint-Maur-des-Fossés</div>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li class="active"><a href="index.html">Accueil</a></li>
+        <li><a href="fr/vetement-country.html">Notre style &amp; marques</a></li>
+        <li><a href="fr/photos-vetements.html">Notre collection</a></li>
+        <li><a href="fr/nouveautes-western.html">Actualités</a></li>
+        <li><a href="fr/boutique-de-vetements.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Accueil</a>
+    <a href="fr/vetement-country.html">Notre style et nos marques</a>
+    <a href="fr/photos-vetements.html">Notre collection</a>
+    <a href="fr/nouveautes-western.html">Actualités</a>
+    <a href="fr/boutique-de-vetements.html">Contact</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Ouvert depuis 1979</div>
+    <h1 class="hero-title">Magasin de<br>vêtements à<br><em>Saint-Maur</em></h1>
+    <p class="hero-desc"><strong>Lucky Look</strong> vous propose un grand choix de produits imprégnés de l'atmosphère western ou plus classiques. Boutique de prêt-à-porter reconnue avec conseils de jeansologue.</p>
+    <div class="hero-cta">
+      <a href="fr/photos-vetements.html" class="btn-primary">Voir la collection</a>
+      <a href="fr/boutique-de-vetements.html" class="btn-outline">Nous contacter</a>
+    </div>
+  </div>
+  <div class="hero-since">
+    <div class="num">1979</div>
+    <div class="lbl">Fondé en</div>
+  </div>
+</section>
+
+<!-- HORAIRES -->
+<div class="hours-band">
+  <div class="hours-inner">
+    <div class="hours-label">Horaires d'ouverture</div>
+    <div class="hours-grid">
+      <div class="hour-col"><div class="hour-day">Lu</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+      <div class="hour-col"><div class="hour-day">Ma</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+      <div class="hour-col"><div class="hour-day">Me</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+      <div class="hour-col"><div class="hour-day">Je</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+      <div class="hour-col"><div class="hour-day">Ve</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+      <div class="hour-col"><div class="hour-day">Sa</div><div class="hour-time">9h–12h<br>14h–19h</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-text reveal">
+        <p class="eyebrow">Notre histoire</p>
+        <h2>Magasin de vêtements à Saint-Maur-des-Fossés</h2>
+        <div class="divider"><span>✦</span></div>
+        <p><strong>Magasin de vêtements à Saint-Maur-des-Fossés</strong> ouvert depuis 1979, Lucky Look vous propose un grand choix de produits imprégnés de l'atmosphère western ou plus classiques. Vous cherchez une boutique de prêt-à-porter reconnue où vous pouvez être conseillé par un jeansologue ? Vous êtes au bon endroit !</p>
+        <h3>Ambiance des lieux et marques de vêtements country proposées</h3>
+        <p>Le critère numéro 1 pour chaque approvisionnement est la <a href="fr/vetement-country.html">qualité des vêtements country ou d'autres styles</a> proposés à la vente. Coupe, textiles, finitions, solidité sont autant d'éléments pris en compte : un concentré de valeur assuré !</p>
+        <p>Votre <strong>magasin de jeans</strong> et d'articles de prêt-à-porter soigne aussi l'accueil et la décoration des lieux pour vous faire passer un bon moment. Lucky Look est souvent considéré comme l'un des plus jolis magasins de vêtements du secteur de la capitale, qui habille et chausse les femmes et les hommes. Merci pour vos retours !</p>
+      </div>
+      <div class="intro-img reveal" style="transition-delay:.15s">
+        <img src="media/images/upload/content-home.jpg" alt="Magasin de vêtements Lucky Look">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="eyebrow" style="color:var(--sand)">Notre offre</p>
+      <h2>Présentation et photos des vêtements,<br>chaussures et accessoires</h2>
+      <p>Jeannerie et boutique de mode polyvalente, Lucky Look vous présente des articles d'habillement variés.</p>
+    </div>
+  </div>
+  <div class="product-grid">
+    <div class="product-card reveal">
+      <img src="media/images/box-1.png" alt="Jean">
+      <div class="product-card-body">
+        <div class="product-card-num">01</div>
+        <h3>Jean</h3>
+        <p>L'aspect <strong>jeannerie</strong> est une part importante de l'activité. Large gamme de jeans selon votre morphologie et votre style.</p>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:.1s">
+      <img src="media/images/box-2.png" alt="Chaussures">
+      <div class="product-card-body">
+        <div class="product-card-num">02</div>
+        <h3>Chaussures</h3>
+        <p>Des élégantes boots urbaines aux Caterpillar robustes en passant par les iconiques santiags.</p>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:.2s">
+      <img src="media/images/box-3.png" alt="Accessoires">
+      <div class="product-card-body">
+        <div class="product-card-num">03</div>
+        <h3>Accessoires</h3>
+        <p>Optez pour divers accessoires vestimentaires qui agrémenteront votre tenue !</p>
+      </div>
+    </div>
+  </div>
+  <div class="products-cta reveal">
+    <a href="fr/photos-vetements.html" class="btn-primary">Voir les photos des vêtements →</a>
+    &nbsp;&nbsp;
+    <a href="fr/boutique-de-vetements.html" class="btn-outline" style="color:var(--sand);border-color:rgba(196,149,106,.4)">Contactez votre boutique →</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="eyebrow">La boutique en images</p>
+      <h2>Notre galerie</h2>
+    </div>
+    <div class="gallery-grid reveal" style="transition-delay:.1s">
+      <a href="media/images/gallery/12/big/51.jpg"><img src="media/images/gallery/12/thumb/51.jpg" alt="Lucky Look"></a>
+      <a href="media/images/gallery/12/big/50.jpg"><img src="media/images/gallery/12/thumb/50.jpg" alt="Lucky Look"></a>
+      <a href="media/images/gallery/12/big/49.jpg"><img src="media/images/gallery/12/thumb/49.jpg" alt="Lucky Look"></a>
+      <a href="media/images/gallery/12/big/48.jpg"><img src="media/images/gallery/12/thumb/48.jpg" alt="Lucky Look"></a>
+      <a href="media/images/gallery/12/big/47.jpg"><img src="media/images/gallery/12/thumb/47.jpg" alt="Lucky Look"></a>
+      <a href="media/images/gallery/12/big/46.jpg"><img src="media/images/gallery/12/thumb/46.jpg" alt="Lucky Look - Saint-Maur-des-Fossés"></a>
+      <a href="media/images/gallery/12/big/45.jpg"><img src="media/images/gallery/12/thumb/45.jpg" alt="Lucky Look - Saint-Maur-des-Fossés"></a>
+      <a href="media/images/gallery/12/big/44.jpg"><img src="media/images/gallery/12/thumb/44.jpg" alt="Lucky Look - Saint-Maur-des-Fossés"></a>
+      <a href="media/images/gallery/12/big/43.jpg"><img src="media/images/gallery/12/thumb/43.jpg" alt="Lucky Look - Saint-Maur-des-Fossés"></a>
+      <a href="media/images/gallery/12/big/42.jpg"><img src="media/images/gallery/12/thumb/42.jpg" alt="Lucky Look - Saint-Maur-des-Fossés"></a>
+    </div>
+    <div class="gallery-cta reveal" style="transition-delay:.2s">
+      <a href="fr/photos-vetements.html" class="btn-primary" style="background:var(--rust);border-color:var(--rust);color:#fff">Voir toute la collection →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="newsletter-text reveal">
+        <p class="eyebrow" style="color:rgba(242,232,213,.55)">Restez informé</p>
+        <h2>Newsletter</h2>
+        <p>Recevez nos dernières nouveautés et promotions directement dans votre boîte mail.</p>
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <form class="nl-form" name="form-nl" id="form-nl" method="post" action="https://www.boutique-luckylook.fr/newsletterv2/subscribe">
+          <input type="hidden" name="subscriber[lang]" value="fr">
+          <input type="hidden" name="lang" value="fr">
+          <input type="hidden" name="captchaOn" value="0">
+          <input type="hidden" name="lists[]" value="1">
+          <div class="nl-row">
+            <input class="nl-input" type="text" name="subscriber[firstName]" placeholder="Prénom">
+            <input class="nl-input" type="text" name="subscriber[lastName]" placeholder="Nom">
+          </div>
+          <input class="nl-input" type="email" name="subscriber[email]" placeholder="Votre adresse email *" required>
+          <label class="nl-gdpr">
+            <input type="checkbox" name="gdpr" required>
+            J'ai lu et j'accepte <a href="fr/confidentiality_ws.html" target="_blank">les conditions générales d'utilisation</a>
+          </label>
+          <button type="button" class="nl-submit">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Le fil de l'actualité</p>
+        <h2>Actualités</h2>
+      </div>
+      <a href="fr/nouveautes-western.html" class="btn-primary" style="font-size:11px;padding:10px 20px">Toutes les actus →</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card reveal">
+        <img class="news-card-img" src="media/images/news/med/11.webp" alt="Comment venir à la boutique Lucky Look ?">
+        <div class="news-card-body">
+          <div class="news-card-date">27/06/2022</div>
+          <h3><a href="fr/comment-venir-a-la-boutique-lucky-look--.html">Comment venir à la boutique Lucky Look ?</a></h3>
+          <p>Situé au 111 Boulevard de Champigny à Saint-Maur-des-Fossés, votre magasin est à proximité de différents arrêts de transport en commun.</p>
+          <span class="news-readmore">En savoir plus</span>
+        </div>
+      </div>
+      <div class="news-card reveal" style="transition-delay:.1s">
+        <img class="news-card-img" src="media/images/news/med/19.webp" alt="Mise en ligne de notre site">
+        <div class="news-card-body">
+          <div class="news-card-date">26/06/2022</div>
+          <h3><a href="fr/mise-en-ligne-de-notre-site.html">Mise en ligne de notre site</a></h3>
+          <p>Retrouvez régulièrement sur notre site les dernières nouveautés de notre entreprise.</p>
+          <span class="news-readmore">En savoir plus</span>
+        </div>
+      </div>
+      <div class="news-card reveal" style="transition-delay:.15s">
+        <img class="news-card-img" src="media/images/news/med/20.webp" alt="Nos actus, notre agenda, nos promotions">
+        <div class="news-card-body">
+          <div class="news-card-date">25/06/2022</div>
+          <h3><a href="fr/bientot-ici--nos-actus--notre-agenda--nos-promotions.html">Bientôt ici, nos actus, notre agenda, nos promotions</a></h3>
+          <p>Bienvenue sur notre site Internet fraîchement mis en ligne !</p>
+          <span class="news-readmore">En savoir plus</span>
+        </div>
+      </div>
+      <div class="news-card reveal" style="transition-delay:.2s">
+        <img class="news-card-img" src="media/images/default-news.png" alt="Actualité en ligne">
+        <div class="news-card-body">
+          <div class="news-card-date">23/06/2022</div>
+          <h3><a href="fr/gros-plan-sur-l-actualite-en-ligne.html">Gros plan sur l'actualité en ligne</a></h3>
+          <p>Restez connecté à l'actualité de l'entreprise et découvrez toutes nos nouveautés.</p>
+          <span class="news-readmore">En savoir plus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <div class="container" style="position:relative;z-index:1">
+    <h2>Une question ? Contactez-nous</h2>
+    <p>Notre équipe est à votre disposition du lundi au samedi, 9h–12h et 14h–19h.</p>
+    <a href="fr/boutique-de-vetements.html" class="btn-primary">Prendre contact</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html"><img src="media/images/footer-logo.png" alt="Lucky Look" onerror="this.style.display='none'"></a>
+        <p>
+          111 Boulevard de Champigny<br>
+          94210 Saint-Maur-des-Fossés<br><br>
+          <a href="tel:0148867872">Tél. 01 48 86 78 72</a><br>
+          <a href="mailto:contact@luckylook.fr">contact@luckylook.fr</a><br><br>
+          N°TVA : FR24316214378
+        </p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/Lucky-Look-101553676050602" target="_blank" aria-label="Facebook">
+            <svg width="12" height="12" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/lucky_look94/" target="_blank" aria-label="Instagram">
+            <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="fr/vetement-country.html">Notre style et nos marques</a></li>
+          <li><a href="fr/photos-vetements.html">Notre collection</a></li>
+          <li><a href="fr/nouveautes-western.html">Actualités</a></li>
+          <li><a href="fr/boutique-de-vetements.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Horaires</h4>
+        <ul>
+          <li><a style="color:var(--parchment);font-weight:600">Lun – Sam</a></li>
+          <li><a>9h – 12h</a></li>
+          <li><a>14h – 19h</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a href="fr/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="fr/confidentiality_ws.html">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Lucky Look — Tous droits réservés</span>
+      <a href="fr/mentions-legales.html">Mentions légales</a>
+    </div>
+  </div>
+</footer>
+
+<div class="back-top" id="backTop" title="Retour en haut">↑</div>
+
+<script>
+  // Hero bg zoom
+  setTimeout(() => document.getElementById('heroBg').classList.add('loaded'), 100);
+
+  // Mobile nav toggle
+  document.getElementById('burger').addEventListener('click', function() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Back to top
+  const bt = document.getElementById('backTop');
+  bt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  window.addEventListener('scroll', () => bt.classList.toggle('show', window.scrollY > 400));
+</script>
+
+</body>
+</html>

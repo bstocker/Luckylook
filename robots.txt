@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /stats/
+Disallow: /media/client-files/*
+Disallow: /media/attachment-file-catalog/*
+Disallow: /media/google-shopping/*
+Disallow: /media/google-my-business/*
+Disallow: /media/facebook/*
+Disallow: /media/pdf/giftcard/*
+Sitemap: https://www.boutique-luckylook.fr/sitemap.xml
+User-agent: AhrefsBot
+Disallow: /
