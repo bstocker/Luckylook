@@ -20,8 +20,8 @@ if (!$email || $msg === '') {
     exit(json_encode(['ok' => false, 'error' => 'Email et message requis.']));
 }
 
-// Base de données en dehors du répertoire web (~/data/ au lieu de ~/www/)
-$dbDir  = dirname(__DIR__) . '/data';
+// Base de données dans www/data/ (protégée par .htaccess)
+$dbDir  = __DIR__ . '/data';
 $dbPath = $dbDir . '/messages.db';
 
 if (!is_dir($dbDir) && !mkdir($dbDir, 0750, true)) {

@@ -16,8 +16,8 @@ if (!defined('ADMIN_PASSWORD_HASH') || ADMIN_PASSWORD_HASH === 'REMPLACEZ_PAR_VO
     die('<pre style="font-family:monospace;padding:32px">Mot de passe non configuré dans admin/config.php</pre>');
 }
 
-// Base de données : ~/data/ (en dehors du répertoire web)
-$DB_PATH = dirname(__DIR__, 2) . '/data/messages.db';
+// Base de données dans www/data/ (protégée par .htaccess)
+$DB_PATH = dirname(__DIR__) . '/data/messages.db';
 $error   = '';
 
 // ── CSRF ──────────────────────────────────────────────────────────────────────
