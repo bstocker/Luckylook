@@ -41,7 +41,7 @@ try {
         phone      TEXT,
         message    TEXT NOT NULL,
         ip         TEXT,
-        created_at TEXT DEFAULT (datetime("now")),
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
         read_at    TEXT
     )');
 
@@ -53,6 +53,5 @@ try {
 } catch (Throwable $e) {
     error_log('[LuckyLook] contact.php : ' . $e->getMessage());
     http_response_code(500);
-    // DEBUG TEMPORAIRE — à supprimer après diagnostic
-    exit(json_encode(['ok' => false, 'error' => $e->getMessage()]));
+    exit(json_encode(['ok' => false, 'error' => 'Erreur serveur, veuillez réessayer.']));
 }
