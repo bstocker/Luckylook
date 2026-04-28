@@ -181,7 +181,10 @@
   </div>
   <div class="contact-form-box reveal" style="transition-delay:.15s">
     <h2>Envoyer un message</h2>
-    <form method="post" action="https://www.boutique-luckylook.fr/contactv2/send">
+    <div id="formSuccess" style="display:none;padding:20px;background:#f0f9f0;border:1px solid #7cb87c;font-size:14px;color:#2d6a2d;line-height:1.6;">
+      ✓ Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.
+    </div>
+    <form id="contactForm" method="post" action="/contact.php">
       <input type="hidden" name="lang" value="fr">
       <div class="form-row">
         <input class="form-input" type="text" name="contact[firstName]" placeholder="Prénom">
@@ -194,7 +197,8 @@
         <input type="checkbox" required>
         J'ai lu et j'accepte <a href="confidentiality_ws.html" target="_blank">les conditions générales d'utilisation</a>
       </label>
-      <button type="submit" class="form-submit">Envoyer le message</button>
+      <div id="formError" style="display:none;margin-bottom:10px;font-size:13px;color:#c0392b;"></div>
+      <button type="submit" class="form-submit" id="formSubmit">Envoyer le message</button>
     </form>
   </div>
 </div>
@@ -255,6 +259,34 @@
   const bt=document.getElementById('backTop');
   bt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   window.addEventListener('scroll',()=>bt.classList.toggle('show',window.scrollY>400));
+
+  // Envoi du formulaire de contact
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn   = document.getElementById('formSubmit');
+    const errEl = document.getElementById('formError');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+    errEl.style.display = 'none';
+    try {
+      const res  = await fetch('/contact.php', { method: 'POST', body: new FormData(this) });
+      const data = await res.json();
+      if (data.ok) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        errEl.textContent = data.error || 'Une erreur est survenue, veuillez réessayer.';
+        errEl.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Envoyer le message';
+      }
+    } catch {
+      errEl.textContent = 'Impossible de contacter le serveur. Vérifiez votre connexion.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Envoyer le message';
+    }
+  });
 </script>
 </body>
 </html>

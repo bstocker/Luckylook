@@ -1,0 +1,5 @@
+# Mot de passe admin (à créer manuellement sur le serveur)
+admin/config.php
+
+# Base de données SQLite (stockée en dehors du répertoire web sur le serveur)
+data/
