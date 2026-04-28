@@ -29,7 +29,7 @@ $csrf = $_SESSION['csrf'];
 // ── Déconnexion ───────────────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     session_destroy();
-    header('Location: messages.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
     if (password_verify($_POST['password'], ADMIN_PASSWORD_HASH)) {
         $_SESSION['ll_admin'] = true;
-        header('Location: messages.php');
+        header('Location: index.php');
         exit;
     }
     $error = 'Mot de passe incorrect.';
@@ -59,7 +59,7 @@ if (isset($_SESSION['ll_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
                ->execute([(int)$_POST['delete']]);
         }
     }
-    header('Location: messages.php');
+    header('Location: index.php');
     exit;
 }
 
