@@ -53,5 +53,6 @@ try {
 } catch (Throwable $e) {
     error_log('[LuckyLook] contact.php : ' . $e->getMessage());
     http_response_code(500);
-    exit(json_encode(['ok' => false, 'error' => 'Erreur serveur, veuillez réessayer.']));
+    // DEBUG TEMPORAIRE — à supprimer après diagnostic
+    exit(json_encode(['ok' => false, 'error' => $e->getMessage()]));
 }
